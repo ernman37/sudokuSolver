@@ -36,15 +36,15 @@ Sudoku::Sudoku(){
 //0's represent unmarked spot
 void Sudoku::getInput(){
     //loop for all 9 rows
-    for (int i = 0; i < 9; i++){
+    for(int i = 0; i < 9; i++){
         cout << "Input Row #" << i+1 << '\n';
         string line = "";
 
-        while (line.length() != 9)
+        while(line.length() != 9)
             getline(cin, line);
 
         //loop for all 9 colums
-        for (int j = 0; j < 9; j++){
+        for(int j = 0; j < 9; j++){
             int num = ((int)line[j]) - 48;
             if(num > 9 || num < 0){
                i--;
@@ -111,8 +111,8 @@ bool Sudoku::solve(int row, int col){
           counter++; 
           table[row][col] = num;
           if(solve(row, col+1)) return true;
+          table[row][col] = 0; //Resets if passed number fails
        }
-       table[row][col] = 0; //Resets if passed number fails
     }
     return false;
 }
