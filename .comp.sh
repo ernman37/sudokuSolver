@@ -1,6 +1,5 @@
 #!/bin/bash
 
-g++ -std=c++17 Sudoku.hpp Sudoku.cpp main.cpp
-mv a.out solver
-rm Sudoku.hpp.gch
-rm .Sudoku.hpp.swp
+g++ -std=c++17 -c Sudoku.hpp Sudoku.cpp
+g++ -std=c++17 -o solver Sudoku.o main.cpp
+rm Sudoku.hpp.*
