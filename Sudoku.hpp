@@ -17,7 +17,8 @@ class Sudoku{
 
   public:
     Sudoku();
-    bool getInput();
+    void getInput();
+    auto getTable() { return table; }
     void print();
 
     bool checkR(const int &, const int &);
@@ -27,6 +28,7 @@ class Sudoku{
     bool solve(int row, int col);
 
     long long getCounter();
+    friend std::ostream& operator<<(std::ostream &, Sudoku &);
 };
 
 #endif

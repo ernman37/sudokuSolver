@@ -1,29 +1,22 @@
 /*
  *   Creator: Ernest M Duckworth IV
- *   Date: Thu Jul  1 11:22:09 2021
+ *   Date: Thu Jul  1 14:42:11 2021
  *   For: 
  *   Description: 
 */
 #include <iostream>
+#include <chrono>
 #include "Sudoku.hpp"
 
 using namespace std;
+using namespace std::chrono;
 
 int main(int argc, const char *argv[]){
-    int grid[N][N] = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
-                       { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
-                       { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
-                       { 0, 0, 3, 0, 1, 0, 0, 8, 0 },
-                       { 9, 0, 0, 8, 6, 3, 0, 0, 5 },
-                       { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
-                       { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
-                       { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
-                       { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
-
-    if (solveSuduko(grid, 0, 0))
-        print(grid);
-    else
-        cout << "no solution  exists " << endl;
-
+    auto start = steady_clock::now();
+    Sudoku s; 
+    auto elapsed = steady_clock::now() - start;
+    auto ms = duration_cast<milliseconds>(elapsed);
+    cout << s.getCounter() << " iterations\n";
+    cout << "That took " << ms.count() << "ms\n";
     return 0;
 }

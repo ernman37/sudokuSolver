@@ -11,9 +11,14 @@
 
 using namespace std;
 
-Sudoku::Sudoku(){ getInput(); }
+Sudoku::Sudoku(){ 
+    getInput(); 
+    cout << "Puzzel Entered: \n" << *this;
+    if(solve(0,0)) cout << "Solved: \n" << *this;
+    else cout << "Unsolvable Puzzel\n";
+}
 
-bool Sudoku::getInput(){
+void Sudoku::getInput(){
     for (int i = 0; i < 9; i++){
         cout << "Input Row #" << i+1 << '\n';
         string line = "";
@@ -27,7 +32,6 @@ bool Sudoku::getInput(){
             table[i][j] = num;
         }
     }
-    return true;
 }
 
 void Sudoku::print(){
@@ -76,7 +80,7 @@ bool Sudoku::solve(int row, int col){
        col = 0;
     }
     //Skips already solved slots
-    if(table[row][col] != 0) return solve(row, ++col);
+    if(table[row][col] != 0) return solve(row, col+1);
     //Trys every number in a loop and removes bad ones
     for(int num = 1; num < 10; num++){
        if(tryN(row, col, num)){
@@ -94,5 +98,14 @@ bool Sudoku::solve(int row, int col){
 
 long long Sudoku::getCounter(){
    return counter;
+}
+
+ostream& operator<<(ostream &os, Sudoku &copy){
+    for(int i = 0; i < 9; i++){
+        for(int j = 0; j < 9; j++)
+           os << copy.getTable()[i][j] << "  ";
+        os << '\n';
+    }
+    return os;
 }
 
