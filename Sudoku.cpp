@@ -8,14 +8,22 @@
 #include <iostream>
 #include "Sudoku.hpp"
 #include <string>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
+using floatsec = duration<double, ratio<1,1>>;
 
 Sudoku::Sudoku(){ 
     getInput(); 
     cout << "Puzzel Entered: \n" << *this;
-    if(solve(0,0)) cout << "Solved: \n" << *this;
+    auto start = steady_clock::now();
+    bool ran = solve(0,0);
+    auto ms = duration_cast<milliseconds>(steady_clock::now() - start);
+    floatsec s = ms;
+    if(ran) cout << "Solved: \n" << *this;
     else cout << "Unsolvable Puzzel\n";
+    cout << counter << " iterations in " << s.count() << " seconds or " << ms.count() << " milliseconds\n";
 }
 
 void Sudoku::getInput(){
